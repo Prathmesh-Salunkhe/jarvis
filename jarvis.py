@@ -8,7 +8,7 @@ engine = pyttsx3.init()
 
 
 def speak(text):
-    print('[Bazinga] : ' + text)
+    print('[Jarvis] : ' + text)
     engine.say(text)
     engine.runAndWait()
 
@@ -28,7 +28,7 @@ def wish_me():
     else:
         greeting = ''
 
-    speak(f'{greeting}, I am Bazinga, How can i help you Sir!')
+    speak(f'{greeting}, I am Jarvis, How can i help you Sir!')
 
 
 def take_command():
@@ -54,13 +54,15 @@ def take_command():
 wish_me()
 while True:
     query = take_command().lower()
+    if 'thank you jarvis' in query or 'close jarvis' in query or 'jarvis close' in query:
+        speak('Thank you sir, jarvis signing off')
+        break
     query = query.replace('jarvis', '')
-    query = query.replace('bazinga', '')
 
     if 'wikipedia' in query:
-        query = query('wikipedia', '')
-        query = query('search', '')
-        query = query('search wikipedia for', '')
+        query = query.replace('wikipedia', '')
+        query = query.replace('search', '')
+        query = query.replace('search wikipedia for', '')
         results = wikipedia.summary(query, sentences=1)
         speak('According to Wikipedia, ' + results)
 
